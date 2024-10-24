@@ -16,7 +16,7 @@ import org.springproject.library.service.UserService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/library/auth")
 public class AuthController {
 
     private final UserService userService;

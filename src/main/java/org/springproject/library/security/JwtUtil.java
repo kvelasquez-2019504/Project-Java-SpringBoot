@@ -23,7 +23,7 @@ public class JwtUtil {
 
     public TokenDto generateToken(String username, List<Role> roles) {
         Date expirationDate = jwtConfig.getExpirationDate();
-        String token = Jwts.builder().subject(username)
+        String token = Jwts.builder().subject(username).header().setType("jwt").and()
                 .issuedAt(new Date())
                 .expiration(expirationDate)
                 .claim(CLAIMS_ROLES_KEY, roles)

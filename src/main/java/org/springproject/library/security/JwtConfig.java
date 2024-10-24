@@ -13,6 +13,7 @@ import java.util.Date;
 @Configuration
 @ConfigurationProperties(prefix="jwt")
 public class JwtConfig {
+    @Value("${jwt.secret}")
     private String secret;
     @Value("${jwt.expiration}") // Ensure this property is set in your application.properties or application.yml
     private Long expiration;
@@ -29,7 +30,7 @@ public class JwtConfig {
     }
 
     public SecretKey getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(this.secret);
+        byte[] keyBytes = Decoders.BASE64URL.decode(this.secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
