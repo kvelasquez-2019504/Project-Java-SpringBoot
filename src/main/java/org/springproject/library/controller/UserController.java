@@ -116,7 +116,7 @@ public class UserController {
         Optional<UserEntity> userSearch = userService.getUserById(id);
         if ( userSearch.isPresent()) {
             userSearch.get().setStatusUser(false);
-            return ResponseEntity.ok(userService.addUser(userSearch.get()));
+            return ResponseEntity.ok(userService.updateUser(userSearch.get()));
         }else{
             return ResponseEntity.notFound().build();
         }
