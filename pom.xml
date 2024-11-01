@@ -12,7 +12,7 @@
 	<artifactId>library</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library</name>
-	<description>Proyecto de certificación, con bases de datos (SQL y NoSQL), API-REST, pruebas unitarias y uso de Token.</description>
+	<description>Proyecto de Java SpringBoot, con bases de datos (SQL y NoSQL), API-REST, pruebas unitarias y uso de Token.</description>
 	<url/>
 	<licenses>
 		<license/>

@@ -59,4 +59,18 @@ public class ReserveController {
         ReserveDto reserveNewDto = new ReserveDto(reserveService.addReserve(reserveNew));
         return ResponseEntity.ok(reserveNewDto);
     }
+
+    @RolesAllowed({ADMIN_ROLE})
+    @PutMapping("/return/{idReserve}")
+    public ResponseEntity returnReserve(@PathVariable String idReserve){
+        Optional<ReserveEntity> reserveFind = reserveService.getReserveById(idReserve);
+        if(reserveFind.isPresent()){
+            Optional <BookEntity> bookFind = bookService.getBookById(reserveFind.get().getIdBook());
+            bookFind.get().setStatusReserveBook(false);
+            bookService.updateBook(bookFind.get());
+            return ResponseEntity.ok().body("El libro se ha devuelto!");
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
