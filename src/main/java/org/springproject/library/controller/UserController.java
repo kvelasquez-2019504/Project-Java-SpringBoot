@@ -31,32 +31,7 @@ public class UserController {
     public UserController(UserService userService) {
     }
 
-    @PostConstruct
-    public void init(){
-        /*UserEntity userAdmin = new UserEntity();
-        userAdmin.setName("Kenneth");
-        userAdmin.setLastname("Velasquez");
-        userAdmin.setUsername("kennethAdmin");
-        userAdmin.setEmail("kenneth@gmail.com");
-        userAdmin.setBirthdate(new Date(2005,10,5));
-        userAdmin.setPasswordEncrypted(passwordEncoder.encode("4dM1n"));
-        userAdmin.addRole(Role.ADMIN);
-        userAdmin.setStatusUser(true);
-        UserEntity user = new UserEntity();
-        user.setUsername("Bryan");
-        user.setUsername("bryanUser");
-        user.setName("Bryan");
-        user.setLastname("Rodriguez");
-        user.setEmail("bryan@gmail.com");
-        user.setBirthdate(new Date(2005,10,15));
-        user.setPasswordEncrypted(passwordEncoder.encode("Us3R"));
-        user.addRole(Role.USER);
-        user.setStatusUser(true);
-        userService.addUser(userAdmin);
-        userService.addUser(user);*/
-    }
-
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity createUser(@RequestBody UserDto userDto){
         UserEntity userNew = new UserEntity();
         userNew.setName(userDto.getName());
@@ -80,7 +55,7 @@ public class UserController {
         return ResponseEntity.ok(listUser);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity getUserById(@PathVariable String id){
         Optional<UserDto> userSearch = userService.getUserById(id).map(user->new UserDto(user));
         if (userSearch.isPresent()) {
@@ -95,7 +70,6 @@ public class UserController {
     public ResponseEntity updateUser(@PathVariable String id, @RequestBody UserDto userDto){
         Optional<UserEntity> userSearch = userService.getUserById(id);
         if ( userSearch.isPresent()) {
-
             userSearch.get().setName(userDto.getName());
             userSearch.get().setLastname(userDto.getLastname());
             userSearch.get().setUsername(userDto.getUsername());

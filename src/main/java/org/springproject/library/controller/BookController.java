@@ -1,6 +1,5 @@
 package org.springproject.library.controller;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    @RolesAllowed(ADMIN_ROLE)
     @PostMapping("/")
     public ResponseEntity createBook(@RequestBody BookDto bookDto){
         BookEntity bookNew = new BookEntity();
@@ -51,7 +51,7 @@ public class BookController {
         }
     }
 
-    @RolesAllowed({ADMIN_ROLE})
+    @RolesAllowed(ADMIN_ROLE)
     @PutMapping("/{id}")
     public ResponseEntity updateBook(@PathVariable String id, @RequestBody BookDto bookDto){
         Optional<BookEntity> bookSearch = bookService.getBookById(id);
